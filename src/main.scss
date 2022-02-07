@@ -1,12 +1,6 @@
-$primary-color: #ffe923e0;
-$secondary-color: black;
-$terciary-color: white;
-$font-color: #aaa;
+@import 'config';
+@import 'button';
 
-$box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.6);
-
-$limit: 10;
-$unit: 8px;
 
 // reusable fnc
 @mixin reset-pm {
@@ -51,43 +45,6 @@ h2 {
   border-radius: 20px;
 }
 
-// BTN CONFIGURATION
-@mixin btn($background-color, $color, $bold) {
-  background-color: $background-color;
-  color: $color;
-  border-radius: 50px;
-  padding: 20px 30px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  @if ($bold == 'true') {
-    font-weight: bold;
-  }
-}
-
-.btn {
-  @include btn(black, white, 'true');
-
-  &.btn-cta {
-    @include btn(
-      $background-color: $primary-color,
-      $color: $secondary-color,
-      $bold: 'true'
-    );
-
-    &:hover {
-      @include btn($secondary-color, $terciary-color, 'true');
-      box-shadow: $box-shadow;
-    }
-  }
-
-  &:hover {
-    @include btn($terciary-color, $secondary-color, 'true');
-    box-shadow: $box-shadow;
-  }
-}
 ul {
   padding: 0;
   margin: 0;
@@ -170,5 +127,24 @@ header {
 @for $i from 1 to 4 {
   .w-#{$i * 25} {
     width: $i * 25%;
+  }
+}
+.prices {
+  .prev {
+    font-size: size(2);
+    font-weight: bolder;
+    color: $font-color;
+    text-decoration: line-through;
+  }
+
+  .now {
+    font-size: size(5);
+    font-weight: bolder;
+  }
+}
+
+@media (max-width: 1280px) {
+  .container {
+    width: 100%;
   }
 }
