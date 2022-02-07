@@ -8,9 +8,13 @@ $box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.6);
 $limit: 10;
 $unit: 8px;
 
-* {
+// reusable fnc
+@mixin reset-pm {
   padding: 0;
   margin: 0;
+}
+* {
+  @include reset-pm();
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -36,4 +40,80 @@ h1 {
 h2 {
   font-weight: lighter;
   font-size: size(3);
+}
+
+.container {
+  background-color: #fff;
+  margin: 100px auto;
+  width: 1280px;
+  padding: 50px;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+// BTN CONFIGURATION
+@mixin btn($background-color, $color, $bold) {
+  background-color: $background-color;
+  color: $color;
+  border-radius: 50px;
+  padding: 20px 30px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  @if ($bold == 'true') {
+    font-weight: bold;
+  }
+}
+
+.btn {
+  @include btn(black, white, 'true');
+
+  &.btn-cta {
+    @include btn(
+      $background-color: $primary-color,
+      $color: $secondary-color,
+      $bold: 'true'
+    );
+
+    &:hover {
+      @include btn($secondary-color, $terciary-color, 'true');
+      box-shadow: $box-shadow;
+    }
+  }
+
+  &:hover {
+    @include btn($terciary-color, $secondary-color, 'true');
+    box-shadow: $box-shadow;
+  }
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  li {
+    a {
+      @include btn($terciary-color, $font-color, 'false');
+      // & like a
+      &:hover {
+        @include btn(
+          darken($color: $terciary-color, $amount: 90),
+          $terciary-color,
+          'false'
+        );
+        box-shadow: $box-shadow;
+      }
+    }
+  }
+}
+
+header {
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
